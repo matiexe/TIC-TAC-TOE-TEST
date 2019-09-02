@@ -10,6 +10,9 @@ let gameSchema = new Schema({
     },
     players:{
         type:Object
+    },
+    winner:{
+        type: String
     }
 })
 

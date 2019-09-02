@@ -23,18 +23,16 @@ const botPlayer = new Player(true,'O');
 const game = {
     id:null,
     tablero:[" "," "," "," "," "," "," "," "," "],
-    players:[]
+    players:[humanPlayer,botPlayer],
+    winner:String
 }
 const tablero = {
     posicion: null,
     valor: " "
 }
 const crearJuego = ()=>{
-    currentPlayer
-    for(let i = 1;i<=9;i++){
-        game.tablero.push(" ");
-    }
-    game.players =[humanPlayer,botPlayer];
+    currentPlayer,
+    game.players;
     return game 
 
 }
@@ -75,7 +73,7 @@ const verificarGanador = () =>{
                     botPlayer.jugadas.indexOf(winnerPosition[i][0])>=0&&
                     botPlayer.jugadas.indexOf(winnerPosition[i][0])>=0
                   ){
-                      return true;
+                      return  true;
                   }
         }
 
@@ -87,6 +85,9 @@ const jugadaValida =(posicion)=>{
     }
     return true;
 }
+const set = (id,players)=>{
+    game.id= id
+}
 const jugada = (posicion, ficha) =>{
     if(casillasDisponibles()>=1){
         if(currentPlayer === 1){
@@ -96,12 +97,14 @@ const jugada = (posicion, ficha) =>{
             game.tablero[posicion-1]=ficha;
             if(humanPlayer.jugadas.length>2){
                 if(verificarGanador(currentPlayer)){
-                    return "El jugador 1 ha ganado";
+
+                    game.winner = "El jugador 1 ha ganado";
+                    return game;
                     
                 }
                 
             }
-                console.log(currentPlayer ,humanPlayer.jugadas,game.tablero,verificarGanador(currentPlayer));
+                console.log(currentPlayer ,humanPlayer.jugadas,game.tablero,verificarGanador(currentPlayer) ,game);
                 currentPlayer = cambiarTurno(currentPlayer);
                 return game.tablero
         } else {
@@ -118,19 +121,22 @@ const jugada = (posicion, ficha) =>{
               
             if(botPlayer.jugadasDone.length>=3){
                 if(verificarGanador(2)){
-                    return "La computadora ha ganado";
+                    game.winner = "La computadora ha ganado";
+                    return game;
                 }
             }
             console.log(currentPlayer,botPlayer.jugadas , casillasDisponibles()) ;
             currentPlayer = cambiarTurno(currentPlayer);
             return game.tablero;
     } else {
-        return 'JUEGO EMPATADO';
+        game.winner = 'JUEGO EMPATADO';
+        return game;
     }
     
 }
 
 module.exports = {
     crearJuego,
-    jugada
+    jugada,
+    set
 }

@@ -18,6 +18,17 @@ mongoose.connect(process.env.URLDB,{useNewUrlParser:true,useCreateIndex:true},(e
     console.log('bd conectada');
 });
 //routes
+//Obtiene los juegos jugados creados
+app.get('/api/game/s',(req,res)=>{
+    Game.find((err,gameBD)=>{
+        if(err){
+            ok:false,
+            err
+        }
+        return res.status(201).json(gameBD);
+    })
+    
+})
 // Crea un juego nuevo
 app.post ('/api/game',(req,res)=>{
     const game = apiGame.crearJuego();
@@ -53,7 +64,24 @@ app.get('/api/game/:id',(req, res)=>{
 app.post ('/api/game/:id',(req,res)=>{
     pos = req.body.pos;
     ficha = req.body.ficha;
-    const movimiento =  apiGame.jugada(pos,ficha);
+    let players
+    Game.findById(req.params.id,(err,gameBD)=>{
+        if(err){
+            return res.status(400).json({
+                ok:false,
+                err
+            })
+        }  players = gameBD; 
+    })
+    set = apiGame.set(req.params.id,players);
+    const movimiento = apiGame.jugada(pos,ficha);
+    const dataRefresh ={
+        id:movimiento.id,
+        tablero:movimiento.tablero,
+        players:players,
+        winner :movimiento.winner
+    }
+    console.log(dataRefresh,movimiento);
     Game.findByIdAndUpdate(req.params.id,{tablero:movimiento},(err,gameBD)=>{
         if(err){
             return res.status(400).json({
@@ -61,7 +89,7 @@ app.post ('/api/game/:id',(req,res)=>{
                 err
             });
         }
-        res.status(201).json(movimiento);
+        res.status(201).json(gameBD);
     })
     
 })
