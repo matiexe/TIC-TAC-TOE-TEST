@@ -34,7 +34,8 @@ app.post ('/api/game',(req,res)=>{
     const game = apiGame.crearJuego();
     const nuevoJuego = new Game({
         tablero:game.tablero,
-        players: game.players
+        players: game.players,
+        winner :game.winner
     });
     nuevoJuego.save((err,nuevoJuegoBD)=>{
         if(err){
@@ -73,7 +74,7 @@ app.post ('/api/game/:id',(req,res)=>{
             })
         }  players = gameBD; 
     })
-    set = apiGame.set(req.params.id,players);
+    //set = apiGame.set(req.params.id,players);
     const movimiento = apiGame.jugada(pos,ficha);
     const dataRefresh ={
         "id":movimiento.id,

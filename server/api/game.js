@@ -21,10 +21,9 @@ let currentPlayer = 1;
 const humanPlayer = new Player(false,'X');
 const botPlayer = new Player(true,'O');
 const game = {
-    id:null,
     tablero:[" "," "," "," "," "," "," "," "," "],
     players:[humanPlayer,botPlayer],
-    winner:String
+    winner:'no hay ganador'
 }
 const tablero = {
     posicion: null,
@@ -85,7 +84,7 @@ const jugadaValida =(posicion)=>{
     return true;
 }
 const set = (id,players)=>{
-    game.id= id
+    //game.id= id
 }
 const jugada = (posicion, ficha) =>{
     if(casillasDisponibles()>=1){
@@ -103,18 +102,18 @@ const jugada = (posicion, ficha) =>{
                 }
                 
             }
-                console.log(currentPlayer ,humanPlayer.jugadas,game.tablero,verificarGanador(currentPlayer) ,game);
+                console.log(currentPlayer ,humanPlayer.jugadas,game.tablero,verificarGanador(currentPlayer));
                 currentPlayer = cambiarTurno(currentPlayer);
-                return game.tablero
+                return game
         } else {
-            pos= Math.floor(Math.random()*9);
+            pos= Math.floor(Math.random()*8);
             while(jugadaValida(pos)==false){
-                pos = Math.floor(Math.random()*9);
+                pos = Math.floor(Math.random()*8);
                 jugadaValida(pos);
             }
                 botPlayer.jugadas.push(pos+1);
                 botPlayer.jugadasDone= botPlayer.jugadasDone+1;
-                game.tablero[posicion]='O';
+                game.tablero[pos]='O';
             
             }
               
@@ -126,7 +125,7 @@ const jugada = (posicion, ficha) =>{
             }
             console.log(currentPlayer,botPlayer.jugadas , casillasDisponibles()) ;
             currentPlayer = cambiarTurno(currentPlayer);
-            return game.tablero;
+            return game;
     } else {
         game.winner = 'JUEGO EMPATADO';
         return game;
