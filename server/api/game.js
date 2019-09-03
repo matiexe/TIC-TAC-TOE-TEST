@@ -56,13 +56,12 @@ const casillasDisponibles = () =>{
 }
 
 const verificarGanador = () =>{
-    let winner = false;
     if (currentPlayer === 1){
         for(let i = 0;i<winnerPosition.length;i++){
             if(
                 humanPlayer.jugadas.indexOf(winnerPosition[i][0])>=0&&
-                humanPlayer.jugadas.indexOf(winnerPosition[i][0])>=0&&
-                humanPlayer.jugadas.indexOf(winnerPosition[i][0])>=0
+                humanPlayer.jugadas.indexOf(winnerPosition[i][1])>=0&&
+                humanPlayer.jugadas.indexOf(winnerPosition[i][2])>=0
               ){
                  return true;
               }
@@ -70,8 +69,8 @@ const verificarGanador = () =>{
             for(let i = 0;i< winnerPosition.length;i++){
                 if(
                     botPlayer.jugadas.indexOf(winnerPosition[i][0])>=0&&
-                    botPlayer.jugadas.indexOf(winnerPosition[i][0])>=0&&
-                    botPlayer.jugadas.indexOf(winnerPosition[i][0])>=0
+                    botPlayer.jugadas.indexOf(winnerPosition[i][1])>=0&&
+                    botPlayer.jugadas.indexOf(winnerPosition[i][2])>=0
                   ){
                       return  true;
                   }
@@ -108,19 +107,19 @@ const jugada = (posicion, ficha) =>{
                 currentPlayer = cambiarTurno(currentPlayer);
                 return game.tablero
         } else {
-            posicion = Math.floor(Math.random()*9);
-            while(jugadaValida(posicion)==false){
-                posicion = Math.floor(Math.random()*9);
-                jugadaValida(posicion);
+            pos= Math.floor(Math.random()*9);
+            while(jugadaValida(pos)==false){
+                pos = Math.floor(Math.random()*9);
+                jugadaValida(pos);
             }
-                botPlayer.jugadas.push(posicion+1);
+                botPlayer.jugadas.push(pos+1);
                 botPlayer.jugadasDone= botPlayer.jugadasDone+1;
                 game.tablero[posicion]='O';
             
             }
               
             if(botPlayer.jugadasDone.length>=3){
-                if(verificarGanador(2)){
+                if(verificarGanador(currentPlayer)){
                     game.winner = "La computadora ha ganado";
                     return game;
                 }

@@ -76,13 +76,13 @@ app.post ('/api/game/:id',(req,res)=>{
     set = apiGame.set(req.params.id,players);
     const movimiento = apiGame.jugada(pos,ficha);
     const dataRefresh ={
-        id:movimiento.id,
-        tablero:movimiento.tablero,
-        players:players,
-        winner :movimiento.winner
+        "id":movimiento.id,
+        'tablero':movimiento.tablero,
+        'players':movimiento.players,
+        'winner' :movimiento.winner
     }
     console.log(dataRefresh,movimiento);
-    Game.findByIdAndUpdate(req.params.id,{tablero:movimiento},(err,gameBD)=>{
+    Game.findByIdAndUpdate(req.params.id,movimiento,(err,gameBD)=>{
         if(err){
             return res.status(400).json({
                 ok: false,
