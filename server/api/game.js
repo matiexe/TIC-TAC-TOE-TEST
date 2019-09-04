@@ -111,7 +111,7 @@ const jugada = (posicion, ficha) =>{
                 pos = Math.floor(Math.random()*8);
                 jugadaValida(pos);
             }
-                botPlayer.jugadas.push(pos+1);
+                botPlayer.jugadas.push(pos+1);  
                 botPlayer.jugadasDone= botPlayer.jugadasDone+1;
                 game.tablero[pos]='O';
             

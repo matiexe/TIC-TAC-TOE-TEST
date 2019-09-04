@@ -8,3 +8,6 @@ A simple TIC TAC TOE (TaTeTi in argentina) RESTFULL API made in NODE JS and MONG
 + **get  api/game/s  --->** *Obtain a list of game played*
 + **get  api/game/id --->** *Obtain a specific game*
 + **post api/game/id --->** *Insert Human player movement into tile of board*
+
+###Test API Online
+You can test whith **postman** using this url  https://tictactoeapi.herokuapp.com
