@@ -41,24 +41,20 @@ export class AppComponent {
   playerMove(pos) {
     this.gs.playerMove( this.id, pos, this.ficha)
     .subscribe(move => {
-      console.log(move);
-      console.log('humano jugando' + pos);
       this.getGame();
     });
   }
   botMove() {
     this.gs.botMove( this.id)
     .subscribe(move => {
-      console.log(move);
+      this.getGame();
     });
   }
   gaming(pos) {
    {
       this.playerMove(pos);
-      this.getGame();
       setTimeout(() => {
        this.botMove();
-       this.getGame();
       }, 2000);
 
   }
