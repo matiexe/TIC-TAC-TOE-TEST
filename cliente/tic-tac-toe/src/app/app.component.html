@@ -1,0 +1,24 @@
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<nav class="navbar navbar-light bg-light">
+    <a class="navbar-brand" href="#">
+      <img  width="30" height="30" class="d-inline-block align-top" alt="">
+      TIC  TAC TOE
+    </a>
+  </nav>
+<div class="container">
+  <div class="row margen">
+      <a class="btn btn-danger e" (click)="newGame($event)" href="#">Juego Nuevo</a>
+       <a class="btn btn-danger e" (click)="restartGame($event)" href="#">Reiniciar</a>
+       <a class="btn btn-danger e" (click)="getGame($event)" href="#">getGame</a>
+    </div>
+  <div class="row">
+    <div class="col">
+      <div class="game-area">
+          <mat-grid-list class="tick-tack-grid" cols='3'>
+            <mat-grid-tile *ngFor="let item of tablero; let i = index; trackBy: trackByFn" (click)="gaming(i)"><i></i>{{item}}</mat-grid-tile>
+          </mat-grid-list>
+      </div>
+
+    </div>
+  </div>
+</div>
