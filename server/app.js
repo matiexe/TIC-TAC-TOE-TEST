@@ -11,7 +11,14 @@ app.set('port',(process.env.PORT||3000))
 // middlewares
 app.use(express.urlencoded({extended:false}));
 app.use(express.json());
+app.use((req,res,next)=>{
+    res.header('Access-Control-Allow-Origin','*'),
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+    //res.setHeader('Access-Control-Allow-Credentials', true);
 
+    next();
+})
 //DataBase Connection
 mongoose.connect(process.env.URLDB,{useNewUrlParser:true,useCreateIndex:true},(err,res)=>{
     if(err) throw err;
@@ -30,7 +37,7 @@ app.get('/api/game/s',(req,res)=>{
     
 })
 // Crea un juego nuevo
-app.post ('/api/game',(req,res)=>{
+app.post('/api/game',(req,res)=>{
     const game = apiGame.crearJuego();
     const nuevoJuego = new Game({
         tablero:game.tablero,
@@ -44,7 +51,7 @@ app.post ('/api/game',(req,res)=>{
                 err
             })
         }
-        res.status(201).json(nuevoJuegoBD);
+        res.status(201).json(nuevoJuegoBD._id);
     })
 })
 // Consulta un juego con su id
@@ -62,7 +69,7 @@ app.get('/api/game/:id',(req, res)=>{
     
 });
 //inserta un movimiento en un juego creado
-app.post ('/api/game/:id',(req,res)=>{
+app.put ('/api/game/:id',(req,res)=>{
     pos = req.body.pos;
     ficha = req.body.ficha;
     let players

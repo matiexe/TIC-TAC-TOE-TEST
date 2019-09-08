@@ -90,9 +90,9 @@ const jugada = (posicion, ficha) =>{
     if(casillasDisponibles()>=1){
         if(currentPlayer === 1){
             posicion = Number(posicion)
-            humanPlayer.jugadas.push(posicion);
+            humanPlayer.jugadas.push(posicion+1);
             humanPlayer.jugadasDone = humanPlayer.jugadasDone+1;
-            game.tablero[posicion-1]=ficha;
+            game.tablero[posicion]=ficha;
             if(humanPlayer.jugadas.length>2){
                 if(verificarGanador(currentPlayer)){
 
