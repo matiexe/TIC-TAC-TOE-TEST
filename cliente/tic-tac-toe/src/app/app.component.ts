@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {GameService} from './game.service';
-import { setTimeout } from 'timers';
 
 
 @Component({
@@ -36,6 +35,8 @@ export class AppComponent {
      .subscribe(gameId => {
         console.log(gameId);
         this.tablero = gameId.tablero;
+        console.log(gameId.winner);
+        this.checkWinner(gameId.winner);
      });
   }
   playerMove(pos) {
@@ -49,6 +50,11 @@ export class AppComponent {
     .subscribe(move => {
       this.getGame();
     });
+  }
+  checkWinner(winner) {
+      if (winner.check) {
+        this.snackBar.open(winner.msg, 'GANADOR', { duration: 10000 });
+      }
   }
   gaming(pos) {
    {
