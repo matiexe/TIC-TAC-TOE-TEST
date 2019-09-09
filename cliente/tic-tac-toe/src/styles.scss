@@ -2,13 +2,12 @@
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 .game-area {
     margin-top: 25px;
-    width: 40%;
-    margin-left: 30%;
-    margin-right: 30%;
+    width: 90%;
+    margin-left: 5%;
+    margin-right: 5%;
 }
 .margen {
-    padding-left: 40%;
-    margin-right: 30%;
+    margin:10px 30px 10px 30px;
 }
 .e {
     margin: 10px;
@@ -36,4 +35,47 @@
             color: red;
         }
 		
-	}}
+    }}
+    
+    @media (min-width: 576px) { 
+        .game-area {
+            margin-top: 25px;
+            width: 90%;
+            margin-left: 5%;
+            margin-right: 5%;
+        }
+
+     }
+
+    // Medium devices (tablets, 768px and up)
+    @media (min-width: 768px) { 
+        .game-area {
+            margin-top: 25px;
+            width: 90%;
+            margin-left: 5%;
+            margin-right: 5%;
+        }
+     }
+    
+    // Large devices (desktops, 992px and up)
+    @media (min-width: 992px) {
+        .game-area {
+            margin-top: 25px;
+            width: 50%;
+            margin-left: 25%;
+            margin-right: 25%;
+        }
+        .margen {
+            margin:30px 0px 30px 0px;
+        }
+     }
+    
+    // Extra large devices (large desktops, 1200px and up)
+    @media (min-width: 1200px) {
+        .game-area {
+            margin-top: 25px;
+            width: 50%;
+            margin-left: 25%;
+            margin-right: 25%;
+        }
+      }
