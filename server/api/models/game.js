@@ -12,7 +12,10 @@ let gameSchema = new Schema({
         type:Object
     },
     winner:{
-        type: String
+        type: {
+            msg:String,
+            check: Boolean
+        }
     }
 })
 

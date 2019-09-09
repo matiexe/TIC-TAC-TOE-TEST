@@ -23,7 +23,7 @@ const botPlayer = new Player(true,'O');
 const game = {
     tablero:[" "," "," "," "," "," "," "," "," "],
     players:[humanPlayer,botPlayer],
-    winner:'no hay ganador'
+    winner:{ msg:'no hay ganador',check: false }
 }
 const tablero = {
     posicion: null,
@@ -96,7 +96,7 @@ const jugada = (posicion, ficha) =>{
             if(humanPlayer.jugadas.length>2){
                 if(verificarGanador(currentPlayer)){
 
-                    game.winner = "El jugador 1 ha ganado";
+                    game.winner = {msg:"El humano ha ganado",check:true};
                     return game;
                     
                 }
@@ -119,7 +119,9 @@ const jugada = (posicion, ficha) =>{
               
             if(botPlayer.jugadasDone.length>=3){
                 if(verificarGanador(currentPlayer)){
-                    game.winner = "La computadora ha ganado";
+                    game.winner.check = true;
+                    game.winner.msg="La computadora ha ganado"
+                    "";
                     return game;
                 }
             }
@@ -127,7 +129,8 @@ const jugada = (posicion, ficha) =>{
             currentPlayer = cambiarTurno(currentPlayer);
             return game;
     } else {
-        game.winner = 'JUEGO EMPATADO';
+        game.winner.msg = 'JUEGO EMPATADO';
+        game.winner.check = false;
         return game;
     }
     
